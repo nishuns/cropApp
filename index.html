@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>image uploadder</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ==UploadBox interface==*/
+        .uploadBox{
+            width: 1280px;
+            height: 768px;
+            background: rgb(207, 207, 207);
+            margin: 5em auto;
+            padding: 0em 1em 0em 1em;
+            
+        }
+
+        /*== uploadIcon interface ==*/
+        .uploadIcon{
+            margin: 0 auto;
+            font-size: 18rem;
+            text-align: center;
+            color: rgb(177, 177, 177);
+            cursor: pointer;
+            /* border: 1px solid red; */
+            box-sizing: border-box;
+        }
+
+        /* tagline Interface */
+        .tagline{
+            text-align: center;
+            font-size: 1.5rem;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: rgb(136, 136, 136);
+        }
+
+        /* upload button */
+        .upload{
+            display: flex;
+            margin: 3rem auto;
+            font-size: 1.5rem;
+            padding: .5em 1em;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            border: none;
+            background: rgb(190, 190, 190);
+            color: rgb(136, 136, 136);
+            outline: none;
+            /* border: 1px solid red; */
+        }
+        .upload:active{
+            background: rgb(184, 184, 184);
+        }
+
+        .uploaded{
+            border: 5px dotted rgb(136, 136, 136);
+            height: 240px;
+            padding: 1em;
+            background: rgb(133, 133, 133);
+            display: flex;
+            overflow-x:hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* ==uploaded Images */
+        .imgUpload{
+            background: rgb(88, 88, 88);
+            margin-right: 0.5em;
+            width: 320px;
+            max-height: 200px;
+            border-radius: 25px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="uploadBox">
+        <div class="uploadIcon">+</div>
+        <p class="tagline">Click '+' to Add Photo</p>
+        <input type="file" name="uploadImage" id="uploadImage" accept="image/jpg, image/jpeg,image/png,image/gif" onchange="loadFile(event)" hidden>
+        <button type="submit" class="upload" >upload</button>
+        <div class="uploaded">
+            <img src="./b0e2ac28a0c644f93e4b31a6cfe6f991.jpg" class="imgUpload" alt="">
+        </div>
+    </div>
+    <script>
+        var imageList; 
+
+        // function to get image path
+        var loadFile = function(event) {
+            var link=document.createElement('a');
+            link.className="path";
+            document.querySelector('.uploadBox').append(link);
+            link.target="_blank";
+            imageList=URL.createObjectURL(event.target.files[0]);
+            document.querySelector('.uploadImage').value='';
+            link.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+        }
+        };
+
+        // Adding an element function
+        var addFile=function(){
+            let image=imageList;
+            var img=document.createElement('img');
+            img.className="imgUpload";
+            img.src=image;
+            document.querySelector('.uploaded').append(img);
+        }
+
+        // '+' Add Icon Working
+        document.querySelector('.uploadIcon').onclick=()=>{
+            document.getElementById('uploadImage').click();
+        }
+
+        // upload Image
+        document.querySelector('.upload').onclick=()=>{
+            if(document.getElementById('uploadImage').value.length<1)
+                alert('No file is Choosen');
+            else
+                addFile();
+        }
+    </script>
+</body>
+</html>
