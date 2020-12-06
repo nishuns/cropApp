@@ -44,8 +44,15 @@ var horizontal=function(Cropper){
     addPreview(Cropper);
 }
 
+// vertical fucntion
 var vertical=function(Cropper){
     Cropper.setAspectRatio(1/2);
+    addPreview(Cropper);
+}
+
+// square function
+var square=function(Cropper){
+    Cropper.setAspectRatio(1);
     addPreview(Cropper);
 }
 
@@ -91,6 +98,9 @@ var cropImage=function(){
 
     //vertical selection
     document.getElementById('getVertical').onclick=()=>vertical(cropper);
+
+    // square selection
+    document.getElementById('getSquare').onclick=()=>square(cropper);
 }
 
 

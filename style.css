@@ -236,7 +236,7 @@ footer{
     }
 
     .toolMenu{
-        width: 80%;
+        height: 20%;
         justify-content: space-between;
     }
 
@@ -250,6 +250,35 @@ footer{
 
     .buttonSet{
         font-size: 1rem;
+    }
+}
+
+@media screen and (max-height: 640px){
+    .croppingArea{
+        height: 400px;
+    }
+
+    .croppingTools{
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .toolMenu{
+        flex-direction: column;
+    }
+
+    .buttonSet{
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-height: 510px){
+    .croppingArea{
+        height: 300px;
+    }
+
+    .cropPreview{
+        max-height: 100px;
     }
 }
 
