@@ -1,5 +1,7 @@
 // import './cropperjs/dist/cropper.css';
-var imageList; 
+var imageList=null; 
+
+
 
 // Adding an element function
 var addFile=function(){
@@ -8,19 +10,43 @@ var addFile=function(){
     document.getElementById('download').click();
 }
 
+// function to close cropper
 const closeCrop=function(Cropper){
     document.querySelector('.popup').style.animation="popup 1s 1 forwards";
     document.querySelector('.popup').style.display="none";
+    document.querySelector('.cropPreview').src="./dummy.png";
+    imageList=null;
     Cropper.destroy();
     Cropper=null;
 }
 
+// function for preview
+function addPreview(Cropper){
+    imageList=Cropper.getCroppedCanvas();
+    var preview=document.querySelector('.cropPreview');
+    preview.src=imageList.toDataURL();
+}
+
 // function to save new image
 var cutIt=function(Cropper){
-    imageList=Cropper.getCroppedCanvas();
-    closeCrop(Cropper);
-    addFile();
+    if(imageList!==null)
+        addFile();
+    else{
+        alert("Crop the Image First");
+        closeCrop(Cropper);
+    }
+}
 
+
+// horizontal function
+var horizontal=function(Cropper){
+    Cropper.setAspectRatio(2/1);
+    addPreview(Cropper);
+}
+
+var vertical=function(Cropper){
+    Cropper.setAspectRatio(1/2);
+    addPreview(Cropper);
 }
 
 // function for image cropping
@@ -30,12 +56,12 @@ var cropImage=function(){
 
     var image=document.querySelector('.cropme');
     var cropper = new Cropper(image, {
-        aspectRatio: 1/1,
-        data:{
-            width:500,
-            height: 500
-        },
-        crop(event){
+        aspectRatio: 1,
+        viewMode:1,
+        zoomable: false,
+        cropBoxResizable: true,
+        toggleDragModeOnDblclick:false,
+        crop(event) {
             console.log(event.detail.x);
             console.log(event.detail.y);
             console.log(event.detail.width);
@@ -46,14 +72,25 @@ var cropImage=function(){
         }
     });
     cropper.setCropBoxData({
-        width: 320,
-        height: 200
+        x:0,
+        y:0,
+        width: 100,
+        height: 100
     })
-    // save crop
-    document.getElementById('cut').onclick=()=>cutIt(cropper);
+    // crop image
+    document.getElementById('cut').onclick=()=>addPreview(cropper);
+
+    // download
+    document.getElementById('confirmCut').onclick=()=>cutIt(cropper);
 
     // closing cropper
-    document.querySelector('.close').onclick=()=>closeCrop(cropper);
+    document.querySelector('.cancel').onclick=()=>closeCrop(cropper);
+
+    // horizontal selection
+    document.getElementById('getHorizontal').onclick=()=>horizontal(cropper);
+
+    //vertical selection
+    document.getElementById('getVertical').onclick=()=>vertical(cropper);
 }
 
 
@@ -64,8 +101,8 @@ var loadFile = function(event) {
     link.className="path";
     document.querySelector('body').append(link);
     link.target="_blank";
-    imageList=URL.createObjectURL(event.target.files[0]);
     document.querySelector('.cropme').src=URL.createObjectURL(event.target.files[0]);
+    // document.querySelector('.cropPreview').src=URL.createObjectURL(event.target.files[0]);
     cropImage();
     // document.querySelector('.uploadImage').value='';
     link.onload = function() {

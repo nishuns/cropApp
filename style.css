@@ -1,0 +1,271 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.tempbox{
+    border: 2px solid red;
+}
+
+.allMargin{
+    margin-bottom: 0.5em;
+}
+
+body{
+    background:rgb(32, 32, 32);
+}
+
+.apptitle{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: .7em;
+    color: #fff;
+}
+
+/*== uploadIcon interface ==*/
+.uploadIcon{
+    margin: 0 auto;
+    margin-top: 13em;
+    font-size: 1.2rem;
+    font-family: sans-serif;
+    text-align: center;
+    color: rgb(54, 158, 255);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* tagline Interface */
+.tagline{
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #fff;
+}
+
+/* upload button */
+.upload{
+    display: flex;
+    margin: 3rem auto;
+    font-size: 1.5rem;
+    padding: .5em 1em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border: none;
+    background: rgb(190, 190, 190);
+    color: rgb(136, 136, 136);
+    outline: none;
+    /* border: 1px solid red; */
+}
+.upload:active{
+    background: rgb(184, 184, 184);
+}
+
+.uploaded{
+    position: absolute;
+    bottom:0;
+    left: 0;
+    width: 100%;
+    height: 240px;
+    padding: 1em;
+    /* background: rgb(133, 133, 133); */
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.uploaded::-webkit-scrollbar {
+    display: none;
+}
+
+/* ==uploaded Images */
+.imgUpload{
+    background: rgb(88, 88, 88);
+    margin-right: 0.5em;
+    width: 320px;
+    max-height: 200px;
+    border-radius: 25px;
+}
+
+/* == Popup == */
+
+/* popup-background */
+.popup{
+    display: none;
+    opacity: 0;
+    position: fixed;
+    z-index: 2;
+    background: #eeeeee;
+    width: 100%;
+    min-height: 100vh;
+    top: 0;
+    left: 0
+}
+
+.croppingBox{
+    position: absolute;
+    margin: 0 auto;
+    top: 10%; 
+    left: 20%;
+    width: 60%; 
+    height: 768px; 
+    padding: 1em 1.5em;
+    background: #fff;
+    box-shadow: 1px 1px 6px black; 
+    border-radius: 20px;
+}
+/* -popup-imageManipulation */
+
+.croppingArea{
+    position: relative;
+    top: 15%;
+    width: 55%;
+    height: 500px;
+}
+.cropme{
+    width: 100%;
+}
+
+.croppingTools{
+    position: absolute;
+    top: 20%;
+    left: 60%;
+}
+
+.saveMenu{
+    position: absolute;
+    bottom: 0px;
+    right: 25px;
+    display: flex;
+    align-items: center;
+}
+.buttonSet{
+    margin: 5px;
+    padding: 0.3em 1.5em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.1rem;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.buttonSet:hover{
+    box-shadow: 1px 1px 4px rgb(93, 93, 93);
+}
+
+.buttonSet:active{
+    box-shadow: none;
+}
+
+#cut{
+    background: rgb(255, 0, 179);
+}
+
+#confirmCut{
+    background: #007E33;
+    text-decoration: none;
+}
+
+.cancel{
+    background:rgb(131, 131, 131);
+}
+
+
+/* options */
+.cropPreview{
+    margin: 1em;
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 400px;
+    max-height: 400px;
+    border: 2px solid rgb(0,0,0);
+}
+
+.toolMenu{
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+
+
+footer{
+    font-size: 1.3rem;
+    color: lightgray;
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+@media screen and (max-width: 960px){
+    .popup{
+        background: #fff;
+    }
+
+    .croppingBox{
+        background: none;
+        box-shadow: none;
+        border-radius: 0;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        padding: 0;
+    }
+
+    .croppingTools{
+        width: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cropPreview{
+        margin: 1em auto;
+        min-width: 50px;
+        min-height: 50px;
+        max-width: 400px;
+        max-height: 120px;
+    }
+
+    .croppingArea{
+        width: 100%; 
+        top: 25%;
+    }
+
+    .toolMenu{
+        width: 80%;
+        justify-content: space-between;
+    }
+
+    .saveMenu{
+        width: 100%;
+        justify-content: space-evenly;
+        /* border: 1px solid red; */
+        bottom: 0;
+        right: 0;
+    }
+
+    .buttonSet{
+        font-size: 1rem;
+    }
+}
+
+@keyframes popup{
+    from{
+        opacity: 1;
+    }to{
+        opacity:0;
+        display: none;
+    }
+}
+
+@keyframes appear{
+    from{
+        opacity: 0;
+    }to{
+        opacity:1;
+    }
+}
